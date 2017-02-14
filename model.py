@@ -127,8 +127,11 @@ def main(_):
     sample_image = preprocessing.preprocess_input(np.array([mpimg.imread(X_train_image[0])]))[0]
     print('Image Shape: ', sample_image.shape)
 
-    print('Training Data Count:', len(X_train_image))
-    print('Validation Data Count:', len(X_test_image))
+    sample_per_epoch = len(X_train_image)
+    nb_val_samples = len(X_test_image)
+
+    print('Training Data Count:', sample_per_epoch)
+    print('Validation Data Count:', nb_val_samples)
 
     X_train_image, X_train_flip, y_train_steering = shuffle(X_train_image, X_train_flip, y_train_steering)
 
@@ -142,9 +145,6 @@ def main(_):
         model = comma_ai_model
 
     model.compile(optimizer="adam", loss="mse")
-
-    sample_per_epoch = batch_size*np.floor(len(X_train_image)/batch_size)
-    nb_val_samples = batch_size*np.floor(len(X_test_image)/batch_size)
 
     model.fit_generator(image_generator(X_train_image, X_train_flip, y_train_steering, batch_size), samples_per_epoch=sample_per_epoch, nb_epoch=5, validation_data=image_generator(X_test_image, X_test_flip, y_test_steering, batch_size), nb_val_samples=nb_val_samples)
 
