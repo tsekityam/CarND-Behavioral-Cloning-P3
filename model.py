@@ -146,7 +146,7 @@ def main(_):
 
     model.compile(optimizer="adam", loss="mse")
 
-    model.fit_generator(image_generator(X_train_image, X_train_flip, y_train_steering, batch_size), samples_per_epoch=sample_per_epoch, nb_epoch=5, validation_data=image_generator(X_test_image, X_test_flip, y_test_steering, batch_size), nb_val_samples=nb_val_samples)
+    model.fit_generator(image_generator(X_train_image, X_train_flip, y_train_steering, batch_size), samples_per_epoch=sample_per_epoch, nb_epoch=1, validation_data=image_generator(X_test_image, X_test_flip, y_test_steering, batch_size), nb_val_samples=nb_val_samples)
 
     print("Saving model weights and configuration file.")
 
