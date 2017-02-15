@@ -93,6 +93,7 @@ ENV/
 # project data
 *.csv
 *.jpg
+*.mp4
 
 # simulator
 *.app/*
