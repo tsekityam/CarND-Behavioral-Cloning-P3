@@ -41,23 +41,6 @@ def get_comma_ai_model(shape):
 
     return model
 
-# model developed by Nvidia
-def get_nvidia_model(shape):
-    model = Sequential()
-    model.add(Lambda(lambda x: x/255 - 0.5, input_shape=shape))
-    model.add(Convolution2D(24, 5, 5, subsample=(2, 2), activation='relu'))
-    model.add(Convolution2D(36, 5, 5, subsample=(2, 2), activation='relu'))
-    model.add(Convolution2D(48, 5, 5, subsample=(2, 2), activation='relu'))
-    model.add(Convolution2D(64, 3, 3, activation='relu'))
-    model.add(Convolution2D(64, 3, 3, activation='relu'))
-    model.add(Flatten())
-    model.add(Dense(100, activation='relu'))
-    model.add(Dense(50, activation='relu'))
-    model.add(Dense(10, activation='relu'))
-    model.add(Dense(1))
-
-    return model
-
 def image_generator(X_image, X_flip, y_steering, batch_size):
     sample_image_shape = mpimg.imread(X_image[0]).shape
 
